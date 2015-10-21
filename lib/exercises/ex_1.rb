@@ -1,4 +1,4 @@
-require_relative 'utils/utils'
+require 'utils/utils'
 
 module Euler
   extend self
@@ -10,6 +10,13 @@ module Euler
   end
 
   def ex_2
-
+    problem = <<-eos
+      By considering the terms in the Fibonacci sequence whose values
+      do not exceed four million, find the sum of the even-valued terms.
+    eos
+    answer = Utils.less_than_n_of_fib(4000000)
+      .select{|x| x.even?}
+      .reduce(:+)
+    [problem, answer]
   end
 end

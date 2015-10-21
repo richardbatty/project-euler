@@ -1,11 +1,11 @@
-module Utils
+module Fibonacci
   extend self
 
-  def less_than_n_of_fib(max)
-    fib.take_while {|n| n < max}
+  def stop_before(max)
+    enum.take_while {|n| n < max}
   end
 
-  def fib
+  def enum
     Enumerator.new do |yielder|
       previous = [0, 1]
       loop do

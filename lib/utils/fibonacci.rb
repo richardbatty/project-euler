@@ -1,18 +1,12 @@
 module Fibonacci
-  extend self
+  extend self, Enumerable
 
-  def stop_before(max)
-    enum.take_while {|n| n < max}
-  end
-
-  def enum
-    Enumerator.new do |yielder|
-      previous = [0, 1]
-      loop do
-        current = previous.reduce(:+)
-        yielder.yield current
-        previous = [previous[1], current]
-      end
+  def each
+    previous = [0, 1]
+    loop do
+      current = previous.reduce(:+)
+      yield current
+      previous = [previous[1], current]
     end
   end
 end

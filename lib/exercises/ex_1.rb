@@ -1,4 +1,4 @@
-require 'utils/utils'
+require 'utils/fibonacci'
 
 module Euler
   extend self
@@ -14,7 +14,7 @@ module Euler
       By considering the terms in the Fibonacci sequence whose values
       do not exceed four million, find the sum of the even-valued terms.
     eos
-    answer = Utils.less_than_n_of_fib(4000000)
+    answer = Fibonacci.take_while {|n| n < 4000000}
       .select{|x| x.even?}
       .reduce(:+)
     [problem, answer]

@@ -42,4 +42,23 @@ module Euler
     end
     [problem, answer]
   end
+
+  def ex_5
+    problem = <<-eos
+      What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+    eos
+    # We know 2520 can be divided evenly by 1..10
+    # so we just go up in steps of 2520 and check the divisors
+    # 11..20
+    divisors = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    answer = (2520..Float::INFINITY)
+      .step(2520)
+      .lazy.
+      detect do |n|
+        divisors.all? {|divisor| n % divisor == 0}
+      end.to_i
+
+    [problem, answer]
+  end
+
 end

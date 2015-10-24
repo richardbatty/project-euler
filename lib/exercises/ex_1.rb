@@ -46,10 +46,6 @@ module Euler
   end
 
   def palindrome?(str)
-    str_length = str.length
-    cut_point = str_length/2
-    first_part = str.slice(0, cut_point)
-    second_part = str.slice(str_length - cut_point, str_length)
-    first_part == second_part.reverse
+    str == str.reverse
   end
 end

@@ -28,4 +28,28 @@ module Euler
     answer = Factors.largest_prime_factor(600851475143)
     [problem, answer]
   end
+
+  def ex_4
+    problem = <<-eos
+      Find the largest palindrome made from the product of two 3-digit numbers.
+    eos
+    products = [*100..999].map do |n|
+      [*100..999].map do |m|
+        n * m
+      end
+    end.flatten
+
+    answer = products.sort.reverse.detect do |n|
+      palindrome?(n.to_s)
+    end
+    [problem, answer]
+  end
+
+  def palindrome?(str)
+    str_length = str.length
+    cut_point = str_length/2
+    first_part = str.slice(0, cut_point)
+    second_part = str.slice(str_length - cut_point, str_length)
+    first_part == second_part.reverse
+  end
 end

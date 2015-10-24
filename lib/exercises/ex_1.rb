@@ -1,4 +1,5 @@
 require 'utils/fibonacci'
+require 'utils/factors'
 
 module Euler
   extend self
@@ -17,6 +18,14 @@ module Euler
     answer = Fibonacci.take_while {|n| n < 4000000}
       .select{|x| x.even?}
       .reduce(:+)
+    [problem, answer]
+  end
+
+  def ex_3
+    problem = <<-eos
+      What is the largest prime factor of the number 600851475143 ?
+    eos
+    answer = Factors.largest_prime_factor(600851475143)
     [problem, answer]
   end
 end

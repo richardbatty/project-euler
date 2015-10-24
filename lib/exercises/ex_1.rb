@@ -33,19 +33,13 @@ module Euler
     problem = <<-eos
       Find the largest palindrome made from the product of two 3-digit numbers.
     eos
-    products = [*100..999].map do |n|
-      [*100..999].map do |m|
-        n * m
-      end
-    end.flatten
+    products = [*100..999].repeated_combination(2).map do |a, b|
+      a * b
+    end
 
     answer = products.sort.reverse.detect do |n|
-      palindrome?(n.to_s)
+      n.to_s == n.to_s.reverse
     end
     [problem, answer]
-  end
-
-  def palindrome?(str)
-    str == str.reverse
   end
 end

@@ -1,5 +1,6 @@
 require 'utils/fibonacci'
 require 'utils/factors'
+require 'utils/primes'
 
 module Euler
   extend self
@@ -71,5 +72,13 @@ module Euler
     [problem, answer]
   end
 
+  def ex_7
+    problem = <<-eos
+      What is the 10 001st prime number?
+    eos
+    answer = Primes.nth(10001)
+
+    [problem, answer]
+  end
 
 end

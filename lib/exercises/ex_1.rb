@@ -103,4 +103,17 @@ module Euler
     end
   end
 
+  def ex_9
+    problem = <<-eos
+    There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+    Find the product abc.
+    eos
+    a, b = [*1..1000].repeated_combination(2).detect do |(a,b)|
+      c = Math.sqrt(a ** 2 + b ** 2)
+      a + b + c == 1000
+    end
+    answer = a * b * Math.sqrt((a ** 2 + b ** 2))
+    [problem, answer.to_i]
+  end
+
 end

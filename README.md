@@ -9,7 +9,7 @@ rake 'exercise[1]'
 ```
 This runs the exercise and checks the answer against the answers from [projecteuler-solutions](https://code.google.com/p/projecteuler-solutions/wiki/ProjectEulerSolutions).
 
-Run them all exercises with:
+Run all exercises with:
 
 ```sh
 rake all

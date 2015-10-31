@@ -14,7 +14,7 @@ def format_result(problem, suggested_answer, correct_answer)
   end
 end
 
-task :acceptance, [:exercise_no] do |t, args|
+task :exercise, [:exercise_no] do |t, args|
   puts
   puts format_result(
     *Euler.exercise(args.exercise_no),

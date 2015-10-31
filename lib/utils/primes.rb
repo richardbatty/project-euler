@@ -6,13 +6,13 @@ module Primes
   end
 
   def primes_up_to(n)
-    ints = [*2..n]
+    ints = Array.new(n){|i| true}
     prime = 2
     while prime
       ints = sieve(prime, ints)
       prime = next_prime(prime, ints)
     end
-    ints
+    ints.each_with_index.flat_map{|int, i| int ? [i] : []}.drop(2)
   end
 
   def upper_bound(n)
@@ -27,14 +27,15 @@ module Primes
   end
 
   def next_prime(current_prime, ints)
-    ints.find do |n|
-      n > current_prime
+    ((current_prime + 1)..(ints.length)).find do |n|
+      ints[n] == true
     end
   end
 
   def sieve(prime, list)
-    list.select do |n|
-      n % prime != 0
-    end.push(prime)
+    ((2*prime)..(list.length)).step(prime).each do |n|
+      list[n] = false
+    end
+    list
   end
 end

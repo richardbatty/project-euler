@@ -146,7 +146,7 @@ module Euler
     problem = <<-eos
       Find the sum of all the primes below two million.
     eos
-    answer = Primes.primes_up_to(2000000).reduce(&:+)
+    answer = Primes.up_to(2000000).reduce(&:+)
 
     [problem, answer]
   end

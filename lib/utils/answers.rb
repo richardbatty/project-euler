@@ -1,7 +1,6 @@
 require 'csv'
 
 class Answers
-
   def initialize
     @answers = CSV.read('spec/acceptance/answers.csv')
   end

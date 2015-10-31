@@ -2,20 +2,22 @@ module Primes
   extend self
 
   def nth(n)
-    primes_up_to(upper_bound(n).to_i)[n - 1]  # convert to 0-indexed
+    primes_up_to(_upper_bound(n).to_i)[n - 1]  # convert to 0-indexed
   end
 
   def primes_up_to(n)
     ints = Array.new(n){|i| true}
     prime = 2
     while prime
-      ints = sieve(prime, ints)
-      prime = next_prime(prime, ints)
+      ints = _sieve(prime, ints)
+      prime = _next_prime(prime, ints)
     end
     ints.each_with_index.flat_map{|int, i| int ? [i] : []}.drop(2)
   end
 
-  def upper_bound(n)
+  # 'Private'
+
+  def _upper_bound(n)
     # From http://stackoverflow.com/a/1069023
     # Formula gives upper bound for nth prime where
     # n >= 6
@@ -26,13 +28,13 @@ module Primes
     end
   end
 
-  def next_prime(current_prime, ints)
+  def _next_prime(current_prime, ints)
     ((current_prime + 1)..(ints.length)).find do |n|
       ints[n] == true
     end
   end
 
-  def sieve(prime, list)
+  def _sieve(prime, list)
     ((2*prime)..(list.length)).step(prime).each do |n|
       list[n] = false
     end

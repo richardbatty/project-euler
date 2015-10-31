@@ -6,7 +6,7 @@ require 'csv'
 RSpec::Core::RakeTask.new(:spec)
 
 task :acceptance, [:exercise] do |t, args|
-  Dir["lib/exercises/*"].each {|file| require_relative file }
+  require_relative 'lib/exercises'
 
   answers_array = CSV.read('spec/acceptance/answers.csv')
   answers = answers_array.reduce({}) do |hash, (key, value)|
@@ -20,10 +20,4 @@ task :acceptance, [:exercise] do |t, args|
   else
     puts "No, the answer is #{correct_answer}, not #{suggested_answer}"
   end
-end
-
-task :run, [:exercise] do |t, args|
-  Dir["lib/exercises/*"].each {|file| require_relative file }
-  puts '================================================================='
-  puts Euler.send("ex_#{args.exercise}")
 end

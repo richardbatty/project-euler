@@ -5,8 +5,22 @@ require 'utils/primes'
 module Euler
   extend self
 
+  def exercises_answered
+    instance_methods.select do |method|
+      /^ex_[0-9]+/ =~ method
+    end.map do |method|
+      method[3..-1]
+    end
+  end
+
+  def exercise(exercise_no)
+    send("ex_#{exercise_no}")
+  end
+
   def ex_1
-    problem = 'Find the sum of all the multiples of 3 or 5 below 1000'
+    problem = <<-eos
+      'Find the sum of all the multiples of 3 or 5 below 1000'
+    eos
     answer = [*1..999].select{|n| n % 3 == 0 || n % 5 == 0 }.inject(:+)
     [problem, answer]
   end
@@ -105,8 +119,8 @@ module Euler
 
   def ex_9
     problem = <<-eos
-    There exists exactly one Pythagorean triplet for which a + b + c = 1000.
-    Find the product abc.
+      There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+      Find the product abc.
     eos
     a, b = [*1..1000].repeated_combination(2).detect do |(a,b)|
       c = Math.sqrt(a ** 2 + b ** 2)

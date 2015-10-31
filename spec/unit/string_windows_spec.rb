@@ -6,8 +6,7 @@ describe Substrings do
 
   it 'finds the windows' do
     expect(subject.of_length(3)).to eq(
-      ['abc', 'bcd', 'cde', 'def', 'efg']
+      %w(abc bcd cde def efg)
     )
   end
-
 end

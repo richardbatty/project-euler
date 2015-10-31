@@ -8,10 +8,10 @@ class Answers
   end
 
   def find(exercise_no)
-    solution = @solutions.detect do |question, answer|
+    solution = @solutions.detect do |question, _answer|
       question.to_i == exercise_no.to_i
     end
-    raise AnswerNotFound unless solution
+    fail AnswerNotFound unless solution
     solution[1].to_i
   end
 end

@@ -10,11 +10,14 @@ def format_result(problem, suggested_answer, correct_answer)
   if correct_answer == suggested_answer
     "#{problem}\n      Correct! The answer is #{suggested_answer}"
   else
-    "#{problem}\n      No, the answer is #{correct_answer}, not #{suggested_answer}"
+    %(
+      #{problem}\n      No, the answer is #{correct_answer},
+      not #{suggested_answer}"
+    )
   end
 end
 
-task :exercise, [:exercise_no] do |t, args|
+task :exercise, [:exercise_no] do |_t, args|
   puts
   puts format_result(
     *Euler.exercise(args.exercise_no),
@@ -22,7 +25,7 @@ task :exercise, [:exercise_no] do |t, args|
   )
 end
 
-task :all do |t, args|
+task :all do |_t, _args|
   answers = Answers.new
   puts
   Euler.exercises_answered.each do |exercise_no|

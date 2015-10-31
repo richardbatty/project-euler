@@ -7,11 +7,9 @@ module Euler
   extend self
 
   def exercises_answered
-    instance_methods.select do |method|
-      /^ex_[0-9]+/ =~ method
-    end.map do |method|
-      method[3..-1]
-    end
+    instance_methods
+      .select { |method| /^ex_[0-9]+/ =~ method }
+      .map { |method| method[3..-1] }
   end
 
   def exercise(exercise_no)
@@ -23,8 +21,9 @@ module Euler
       Find the sum of all the multiples of 3 or 5 below 1000
     eos
     answer = [*1..999]
-      .select{|n| n % 3 == 0 || n % 5 == 0 }
-      .reduce(:+)
+             .select { |n| n % 3 == 0 || n % 5 == 0 }
+             .reduce(:+)
+
     [problem, answer]
   end
 
@@ -34,9 +33,10 @@ module Euler
       do not exceed four million, find the sum of the even-valued terms.
     eos
     answer = Fibonacci
-      .take_while {|n| n < 4000000}
-      .select{|x| x.even?}
-      .reduce(:+)
+             .take_while { |n| n < 4_000_000 }
+             .select(&:even?)
+             .reduce(:+)
+
     [problem, answer]
   end
 
@@ -54,13 +54,13 @@ module Euler
       Find the largest palindrome made from the product of two 3-digit numbers.
     eos
     products = [*100..999]
-      .repeated_combination(2)
-      .map{|a, b| a * b}
+               .repeated_combination(2)
+               .map { |a, b| a * b }
 
     answer = products
-      .sort
-      .reverse
-      .detect{|n| n.to_s == n.to_s.reverse}
+             .sort
+             .reverse
+             .detect { |n| n.to_s == n.to_s.reverse }
 
     [problem, answer]
   end
@@ -76,20 +76,21 @@ module Euler
     # so we just go up in steps of 2520 and check the divisors 11..20
     divisors = [*11..20]
     answer = (2520..Float::INFINITY)
-      .step(2520)
-      .detect do |n|
-        divisors.all? {|divisor| n % divisor == 0}
-      end.to_i
+             .step(2520)
+             .detect do |n|
+                divisors.all? { |divisor| n % divisor == 0 }
+              end.to_i
 
     [problem, answer]
   end
+
   def ex_6
     problem = <<-eos
       Find the difference between the sum of the squares of the
       first one hundred natural numbers and the square of the sum.
     eos
-    sum_of_squares = [*1..100].map{|n| n ** 2}.reduce(&:+)
-    square_of_sum = [*1..100].reduce(&:+) ** 2
+    sum_of_squares = [*1..100].map { |n| n**2 }.reduce(&:+)
+    square_of_sum = [*1..100].reduce(&:+)**2
     answer = square_of_sum - sum_of_squares
 
     [problem, answer]
@@ -126,11 +127,11 @@ module Euler
       Find the product abc.
     eos
     a, b, c = [*1..1000]
-      .repeated_combination(2)
-      .flat_map do |(a,b)|
-        c = Math.sqrt(a ** 2 + b ** 2)
-        a + b + c == 1000 ? [a, b, c] : []
-      end
+              .repeated_combination(2)
+              .flat_map do |(a, b)|
+                c = Math.sqrt(a**2 + b**2)
+                a + b + c == 1000 ? [a, b, c] : []
+              end
     answer = a * b * c
 
     [problem, answer.to_i]
@@ -140,9 +141,8 @@ module Euler
     problem = <<-eos
       Find the sum of all the primes below two million.
     eos
-    answer = Primes.up_to(2000000).reduce(&:+)
+    answer = Primes.up_to(2_000_000).reduce(&:+)
 
     [problem, answer]
   end
-
 end

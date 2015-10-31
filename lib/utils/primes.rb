@@ -2,13 +2,13 @@ module Primes
   extend self
 
   def nth(n)
-    up_to(_upper_bound(n))[n - 1]  # convert to 0-indexed
+    up_to(_upper_bound(n))[n - 1] # convert to 0-indexed
   end
 
   def up_to(n)
     # start by assuming all ints are prime
     # integer_states is an array where is_prime(i) == integer_states[i]
-    integer_states = Array.new(n){|i| true}
+    integer_states = Array.new(n) { |_i| true }
     prime = 2
     while prime
       integer_states = _sieve(prime, integer_states)
@@ -22,7 +22,7 @@ module Primes
   def prime_numbers_from_integer_states(integer_states)
     integer_states
       .each_with_index
-      .flat_map{|is_prime, i| is_prime ? [i] : []}
+      .flat_map { |is_prime, i| is_prime ? [i] : [] }
       .drop(2) # because 0 and 1 are not prime
   end
 
@@ -45,7 +45,7 @@ module Primes
 
   def _sieve(prime, integer_states)
     n = integer_states.length
-    ((2*prime)..n).step(prime).each do |integer|
+    ((2 * prime)..n).step(prime).each do |integer|
       integer_states[integer] = false
     end
     integer_states

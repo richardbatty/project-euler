@@ -1,5 +1,4 @@
 class Substrings
-
   def initialize(string)
     @string = string
   end
@@ -10,5 +9,4 @@ class Substrings
       @string.slice(window_start, length)
     end
   end
-
 end
